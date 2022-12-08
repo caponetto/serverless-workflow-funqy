@@ -1,0 +1,58 @@
+{
+  "id": "countryworkflow",
+  "version": "1.0.0",
+  "name": "Country WorkWorkflowflow",
+  "description": "Workflow for countries",
+  "start": "GetCountryInfo",
+  "specVersion": "0.8",
+  "states": [
+    {
+      "name": "GetCountryInfo",
+      "type": "operation",
+      "actions": [
+        {
+          "functionRef": {
+            "refName": "countryFunction",
+            "arguments": {
+              "name": ".name"
+            }
+          }
+        },
+        {
+          "functionRef": {
+            "refName": "populationFunction",
+            "arguments": {
+              "name": ".name"
+            }
+          }
+        },
+        {
+          "functionRef": {
+            "refName": "classificationFunction",
+            "arguments": {
+              "name": ".name"
+            }
+          }
+        }
+      ],
+      "end": true
+    }
+  ],
+  "functions": [
+    {
+      "name": "countryFunction",
+      "type": "rest",
+      "operation": "services.json#country"
+    },
+    {
+      "name": "populationFunction",
+      "type": "rest",
+      "operation": "services.json#population"
+    },
+    {
+      "name": "classificationFunction",
+      "type": "rest",
+      "operation": "services.json#classify"
+    }
+  ]
+}
